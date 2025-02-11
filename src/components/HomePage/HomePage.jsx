@@ -17,11 +17,15 @@ function HomePage() {
       <img src='https://placekeanu.com/400/400' className='placeholder'></img>
       
     </div>
-      <select onChange={(e)=>{ setDefaulto(true)}}>
+      <select onChange={(e)=>{ 
+        setDefaulto(true);
+        if( e.target.value === '3'){
+          setC(true)
+        }}}>
         <option > Please select one of the following funcitons</option>
-        <option > y = Ax + B</option>
-        <option > y = Ax^2 + B </option>
-        <option onSelect={(e)=>{ setC(true)}}> y = Ax^2 + Bx + C</option>
+        <option value={'1'}> y = Ax + B</option>
+        <option value={'2'}> y = Ax^2 + B </option>
+        <option value={'3'}> y = Ax^2 + Bx + C</option>
       </select>
       <div>
       {defaulto ? (
