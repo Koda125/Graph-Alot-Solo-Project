@@ -18,11 +18,16 @@ function HomePage() {
       
     </div>
       <select onChange={(e)=>{ 
-        setDefaulto(true);
-        if( e.target.value === '3'){
-          setC(true)
-        }}}>
-        <option > Please select one of the following funcitons</option>
+        if(e.target.value === '0'){
+          setDefaulto(false), setC(false)
+        };
+        if( e.target.value === '1' || '2'){
+          setDefaulto(true), setC(false);
+        if(e.target.value === '3'){
+            setC(true);
+          
+        }}}}>
+        <option value={'0'}> Please select one of the following funcitons</option>
         <option value={'1'}> y = Ax + B</option>
         <option value={'2'}> y = Ax^2 + B </option>
         <option value={'3'}> y = Ax^2 + Bx + C</option>
@@ -34,10 +39,17 @@ function HomePage() {
           Please give A a value: <input placeholder='Default = 1' type='number'></input>
         </p>
         <p>
-          Please give B a value: <input placeholder='Default = 0' type='number'></input>
+          Please give B a value: <input 
+          placeholder='Default = 0' type='number'
+          >
+          </input>
         </p>
         { C ? (
-          <p>Testing 1..2..3..</p>
+          <p>Please give C a value: 
+            <input placeholder='Default = 0' type='number'
+            >
+            </input>
+          </p>
         ) : (
           <p></p>
         )}

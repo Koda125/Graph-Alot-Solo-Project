@@ -57,3 +57,22 @@ CREATE TRIGGER on_user_update
 BEFORE UPDATE ON "user"
 FOR EACH ROW
 EXECUTE PROCEDURE set_updated_at_to_now();
+
+--Functions Table:
+CREATE TABLE "functions" (
+  "id" SERIAL PRIMARY KEY,
+  "user_id" INT UNIQUE NOT NULL,
+  "functon_base" INT default NULL,
+  "value_a" INT NOT NULL DEFAULT 0,
+  "value_b" INT NOT NULL DEFAULT 0,
+  "value_c" INT NOT NULL DEFAULT 0,
+  "value_d" INT NOT NULL DEFAULT 0,
+  "time_created" TIMESTAMPTZ default now()
+);
+
+-- Favorites Table:
+CREATE TABLE "favorite_graph" (
+	id SERIAL PRIMARY KEY,
+	date_created TIMESTAMPTZ default now(),
+	function_id INT
+);
