@@ -9,6 +9,16 @@ function HomePage() {
   const logOut = useStore((state) => state.logOut);
   const [ defaulto, setDefaulto ] = useState(false)
   const [ C , setC ] = useState(false)
+  const [ isChecked, setIsChecked ] = useState(false)
+  const [ valueY, setValueY ] = useState('0')
+  const [ valueX, setValueX ] = useState('0')
+
+  function checkedBox(e) {
+    console.log("What is isChecked set to: ", isChecked)
+    setIsChecked(e.target.checked)
+  }
+
+
   
 
   return (
@@ -20,13 +30,14 @@ function HomePage() {
       <select onChange={(e)=>{ 
         if(e.target.value === '0'){
           setDefaulto(false), setC(false)
-        };
-        if( e.target.value === '1' || '2'){
-          setDefaulto(true), setC(false);
-        if(e.target.value === '3'){
+        }
+        else if( e.target.value === '1' ||  e.target.value === '2'){
+          setDefaulto(true), setC(false)
+        }
+        else if(e.target.value === '3'){
             setC(true);
           
-        }}}}>
+        }}}>
         <option value={'0'}> Please select one of the following funcitons</option>
         <option value={'1'}> y = Ax + B</option>
         <option value={'2'}> y = Ax^2 + B </option>
@@ -57,6 +68,30 @@ function HomePage() {
       ) : (
         <p>Please make a selection to proceed.</p>
       )}
+      </div>
+      <div>
+        <p> Please check box for more options.
+        <input 
+        type='checkbox'
+        checked={isChecked}
+        onChange={checkedBox}
+        >
+        </input>
+        </p>
+        <div>
+          <p>Find an exact value for Y? </p>
+          <p>
+            If X =
+            </p>
+            <input 
+            type='number'
+            placeholder='Value for X'
+            onChange={(e)=>{setValueX(e.target.value)}}
+            />
+          
+          <p>Y = { valueY }</p>
+        </div>
+        <p>{valueX}</p>
       </div>
     </>
   );
