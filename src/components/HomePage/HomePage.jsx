@@ -12,13 +12,23 @@ function HomePage() {
   const [ isChecked, setIsChecked ] = useState(false)
   const [ valueY, setValueY ] = useState('0')
   const [ valueX, setValueX ] = useState('0')
+  const [ functionOption, setFunctionOption ] = useState('')
 
   function checkedBox(e) {
     console.log("What is isChecked set to: ", isChecked)
     setIsChecked(e.target.checked)
   }
 
+  function findY(){
+    //This function will be used to find the value of Y depending on the selected function option.
+    console.log("Woof woof goes the dog")
+    console.log('What function am I using? ', functionOption)
+  }
 
+  function findX(){
+    console.log("Meow meow goes the cat")
+    console.log('What function am I using? ', functionOption)
+  }
   
 
   return (
@@ -27,15 +37,16 @@ function HomePage() {
       <img src='https://placekeanu.com/400/400' className='placeholder'></img>
       
     </div>
+    {/* May change select feature to: https://codepen.io/celine-andre/pen/JjxVbaO */}
       <select onChange={(e)=>{ 
         if(e.target.value === '0'){
-          setDefaulto(false), setC(false)
+          setDefaulto(false), setC(false), setFunctionOption('0')
         }
         else if( e.target.value === '1' ||  e.target.value === '2'){
-          setDefaulto(true), setC(false)
+          setDefaulto(true), setC(false), setFunctionOption(e.target.value)
         }
         else if(e.target.value === '3'){
-            setC(true);
+            setC(true), setFunctionOption('3');
           
         }}}>
         <option value={'0'}> Please select one of the following funcitons</option>
@@ -87,6 +98,7 @@ function HomePage() {
             placeholder='Value for X'
             onChange={(e)=>{setValueX(e.target.value)}}
             />
+            <button onClick={findY}>Find Y</button>
           
           <p>Y = { valueY }</p>
         </div>
@@ -100,7 +112,7 @@ function HomePage() {
             placeholder='Value for Y'
             onChange={(e)=>{setValueY(e.target.value)}}
             />
-          
+          <button onClick={findX}>Find X</button>
           <p>X = { valueX }</p>
         </div>
       
