@@ -40,26 +40,25 @@ function HomePage() {
         }}}>
         <option value={'0'}> Please select one of the following funcitons</option>
         <option value={'1'}> y = Ax + B</option>
-        <option value={'2'}> y = Ax^2 + B </option>
-        <option value={'3'}> y = Ax^2 + Bx + C</option>
+        <option value={'2'}> y = Ax&sup2; + B </option>
+        <option value={'3'}> y = Ax&sup2; + Bx + C</option>
       </select>
       <div>
       {defaulto ? (
       <div>
         <p>
-          Please give A a value: <input placeholder='Default = 1' type='number'></input>
+          Please give A a value: <input placeholder='Default = 1' type='number' />
         </p>
         <p>
           Please give B a value: <input 
           placeholder='Default = 0' type='number'
-          >
-          </input>
+          />
+          
         </p>
         { C ? (
           <p>Please give C a value: 
             <input placeholder='Default = 0' type='number'
-            >
-            </input>
+            />
           </p>
         ) : (
           <p></p>
@@ -75,8 +74,8 @@ function HomePage() {
         type='checkbox'
         checked={isChecked}
         onChange={checkedBox}
-        >
-        </input>
+        />
+       
         </p>
         <div>
           <p>Find an exact value for Y? </p>
@@ -91,7 +90,20 @@ function HomePage() {
           
           <p>Y = { valueY }</p>
         </div>
-        <p>{valueX}</p>
+        <div>
+          <p>Find an exact value for X? </p>
+          <p>
+            If Y =
+            </p>
+            <input 
+            type='number'
+            placeholder='Value for Y'
+            onChange={(e)=>{setValueY(e.target.value)}}
+            />
+          
+          <p>X = { valueX }</p>
+        </div>
+      
       </div>
     </>
   );
