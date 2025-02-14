@@ -135,12 +135,14 @@ function HomePage() {
         checked={isChecked}
         onChange={checkedBox}
         />
-       { isChecked ? (
+       
+        </p>
+      </div>
+        { isChecked ? (
         <p> testing </p>
        ) : (
         <p> Testing 2 </p>
        )}
-        </p>
         <div>
           <p>Find an exact value for Y? </p>
           <p>
@@ -174,7 +176,7 @@ function HomePage() {
           
         </div>
       
-      </div>
+      
     </>
   );
 }
