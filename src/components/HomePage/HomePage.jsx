@@ -129,25 +129,22 @@ function HomePage() {
       )}
       </div>
       <div>
-        <p> Please check box for more options.
+        
         <input 
         type='checkbox'
         checked={isChecked}
         onChange={checkedBox}
         />
        
-        </p>
+        
       </div>
-        { isChecked ? (
-        <p> testing </p>
-       ) : (
-        <p> Testing 2 </p>
-       )}
-        <div>
+    { isChecked ? (
+      
+      <p> <div>
           <p>Find an exact value for Y? </p>
           <p>
             If X =
-            </p>
+          </p>
             <input 
             type='number'
             placeholder='Value for X'
@@ -174,7 +171,11 @@ function HomePage() {
             <p>X = {roots[0]}, {roots[1]}</p>
           )}
           
-        </div>
+      </div> </p>
+       ) : (
+        <p>Please check box for more options.</p>
+       )}
+        
       
       
     </>
