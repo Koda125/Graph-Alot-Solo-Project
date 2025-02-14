@@ -10,8 +10,13 @@ function HomePage() {
   const [ defaulto, setDefaulto ] = useState(false)
   const [ C , setC ] = useState(false)
   const [ isChecked, setIsChecked ] = useState(false)
-  const [ valueY, setValueY ] = useState('0')
-  const [ valueX, setValueX ] = useState('0')
+  const [ valueA, setValueA ] = useState(1)
+  const [ valueB, setValueB ] = useState(0)
+  const [ valueC, setValueC ] = useState(0)
+  const [ valueY, setValueY ] = useState(0)
+  const [ valueX, setValueX ] = useState(0)
+  const [ roots, setRoots ] = useState([])
+  const [ showing, setShowing ] = useState(true)
   const [ functionOption, setFunctionOption ] = useState('')
 
   function checkedBox(e) {
@@ -21,13 +26,48 @@ function HomePage() {
 
   function findY(){
     //This function will be used to find the value of Y depending on the selected function option.
-    console.log("Woof woof goes the dog")
+    
     console.log('What function am I using? ', functionOption)
+    if (functionOption === '1'){
+      console.log('function base selected is: aX + b')
+      setValueY( Number( (valueA * valueX) + valueB ) )
+      
+    } else if ( functionOption === '2'){
+      setValueY( (valueA * (valueX**2)) + valueB )
+    } else if ( functionOption === '3'){
+      setValueY( ( valueA * (valueX**2)) + (valueB * valueX) + valueC)
+    } else {
+      alert("Please make a selection so we can calculate the values for you.")
+    }
+    console.log( "The calculated value for Y is: ", valueY)
   }
 
   function findX(){
-    console.log("Meow meow goes the cat")
     console.log('What function am I using? ', functionOption)
+    let solutionOne = 0
+    let solutionTwo = 0
+    setRoots([])
+    // to solve for X: x = -b + or - Math.sqrt(b^2 - 4ac + 4ay) all divided by 2a
+    if ( functionOption === '1') {
+      solutionOne = ((valueY - valueB) / valueA )
+      setRoots( [ solutionOne ] )
+    } else if ( functionOption === '2' ){
+      solutionOne = Math.sqrt((valueY - valueB) / valueA)
+      solutionTwo = - Math.sqrt( ( valueY - valueB) / valueA )
+      setRoots([solutionOne, solutionTwo])
+      setShowing(false)
+      
+    }
+    else if ( functionOption === '3'){
+    solutionOne = -(valueB) + Math.sqrt( (valueB**2) - (4 * valueA * valueC) + ( 4 * valueA * valueY ) ) / ( 2*valueA)
+    solutionTwo = -(valueB) - Math.sqrt( (valueB**2) - (4 * valueA * valueC) + ( 4 * valueA * valueY ) ) / ( 2*valueA)
+    setRoots( [solutionOne, solutionTwo] )
+    setShowing(false)
+    } else {
+      alert("Unable to find value for X at this time, please check that all things are filled in.")
+    }
+   
+   
   }
   
 
@@ -46,9 +86,9 @@ function HomePage() {
           setDefaulto(true), setC(false), setFunctionOption(e.target.value)
         }
         else if(e.target.value === '3'){
-            setC(true), setFunctionOption('3');
-          
-        }}}>
+            setC(true), setDefaulto(true), setFunctionOption('3');
+        }
+        }}>
         <option value={'0'}> Please select one of the following funcitons</option>
         <option value={'1'}> y = Ax + B</option>
         <option value={'2'}> y = Ax&sup2; + B </option>
@@ -58,17 +98,26 @@ function HomePage() {
       {defaulto ? (
       <div>
         <p>
-          Please give A a value: <input placeholder='Default = 1' type='number' />
+          Please give A a value: <input 
+          placeholder='Default = 1' 
+          type='number' 
+          onChange={(e)=>{setValueA(e.target.value)}}
+          />
         </p>
+        
         <p>
           Please give B a value: <input 
           placeholder='Default = 0' type='number'
+          onChange={(e)=>{setValueB(Number(e.target.value))}}
           />
           
         </p>
         { C ? (
           <p>Please give C a value: 
-            <input placeholder='Default = 0' type='number'
+            <input 
+            placeholder='Default = 0' 
+            type='number'
+            onChange={(e)=>{setValueC(Number(e.target.value))}}
             />
           </p>
         ) : (
@@ -86,7 +135,11 @@ function HomePage() {
         checked={isChecked}
         onChange={checkedBox}
         />
-       
+       { isChecked ? (
+        <p> testing </p>
+       ) : (
+        <p> Testing 2 </p>
+       )}
         </p>
         <div>
           <p>Find an exact value for Y? </p>
@@ -113,7 +166,12 @@ function HomePage() {
             onChange={(e)=>{setValueY(e.target.value)}}
             />
           <button onClick={findX}>Find X</button>
-          <p>X = { valueX }</p>
+          { showing ? (
+            <p>X = {roots[0]}</p>
+          ) : (
+            <p>X = {roots[0]}, {roots[1]}</p>
+          )}
+          
         </div>
       
       </div>
