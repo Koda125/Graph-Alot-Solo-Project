@@ -59,8 +59,8 @@ function HomePage() {
       
     }
     else if ( functionOption === '3'){
-    solutionOne = -(valueB) + Math.sqrt( (valueB**2) - (4 * valueA * valueC) + ( 4 * valueA * valueY ) ) / ( 2*valueA)
-    solutionTwo = -(valueB) - Math.sqrt( (valueB**2) - (4 * valueA * valueC) + ( 4 * valueA * valueY ) ) / ( 2*valueA)
+    solutionOne = (-(valueB) + Math.sqrt( (valueB**2) - (4 * valueA * valueC) + ( 4 * valueA * valueY ) ) / ( 2*valueA)).toFixed(4)
+    solutionTwo = (-(valueB) - Math.sqrt( (valueB**2) - (4 * valueA * valueC) + ( 4 * valueA * valueY ) ) / ( 2*valueA)).toFixed(4)
     setRoots( [solutionOne, solutionTwo] )
     setShowing(false)
     } else {
@@ -139,8 +139,8 @@ function HomePage() {
         
       </div>
     { isChecked ? (
-      
-      <p> <div>
+      <>
+       <div>
           <p>Find an exact value for Y? </p>
           <p>
             If X =
@@ -171,14 +171,15 @@ function HomePage() {
             <p>X = {roots[0]}, {roots[1]}</p>
           )}
           
-      </div> </p>
+      </div> 
+      </>
        ) : (
         <p>Please check box for more options.</p>
        )}
         
       
       
-    </>
+  </>
   );
 }
 
