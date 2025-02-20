@@ -115,14 +115,14 @@ function HomePage() {
           Please give A a value: <input 
           placeholder='Default = 1' 
           type='number' 
-          onChange={(e)=>{setPassedItems({...passedItems, a: e.target.value})}}
+          onChange={(e)=>{setPassedItems({...passedItems, a: Number(e.target.value)})}}
           />
         </p>
         
         <p>
           Please give B a value: <input 
           placeholder='Default = 0' type='number'
-          onChange={(e)=>{setPassedItems({...passedItems, b: e.target.value})}}
+          onChange={(e)=>{setPassedItems({...passedItems, b: Number(e.target.value)})}}
           />
           
         </p>

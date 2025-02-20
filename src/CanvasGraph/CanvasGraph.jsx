@@ -26,12 +26,28 @@ const CanvasGraph = ( props ) => {
 
     useEffect(() => {
         const canvas = ref.current;
-        if (canvas) {
+        const context = canvas.getContext('2d');
+        DrawGraph();
+        const handleMouseMove = (event) => {
+          const rect = canvas.getBoundingClientRect();
+          const x = (canvas.width / 2) - (event.clientX - rect.left);
+          const y = (canvas.width / 2) - (event.clientY - rect.top);
+          console.log(`x: ${x}, y: ${y}`);
     
-        DrawGraph()
-        }
+          // Optional: Draw a small circle at the mouse position
+          
+          context.beginPath();
+          context.arc(x, y, 5, 10, 2 * Math.PI);
+          context.fillStyle = 'red';
+          context.fill();
+        };
     
-    }, [])
+        canvas.addEventListener('mousemove', handleMouseMove);
+    
+        return () => {
+          canvas.removeEventListener('mousemove', handleMouseMove);
+        };
+      }, []);
     function DrawLine(valueA, valueB, valueC) {
         console.log(valueA, valueB, valueC);
         
@@ -45,7 +61,8 @@ const CanvasGraph = ( props ) => {
             
             
             let startX = -504;
-            let startY = (valueA * startX) + valueB;
+            let startY = Number((valueA * startX) + valueB);
+            console.log("Where does Y start: ", startY)
             
             
             context.moveTo(startX, startY);
