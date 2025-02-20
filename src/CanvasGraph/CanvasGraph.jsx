@@ -32,24 +32,37 @@ const CanvasGraph = ( props ) => {
         }
     
     }, [])
-    function DrawLine(valueA, valueB, valueC ) {
-        console.log(valueA, valueB, valueC)
+    function DrawLine(valueA, valueB, valueC) {
+        console.log(valueA, valueB, valueC);
+        
         const canvas = ref.current;
         const context = canvas.getContext('2d');
-        if (props.passedItems.option === '1'){
-            for(let i = -504; i <= 504; i++){
-                let valueX = i
-                setY( (valueA * valueX) + valueB )
-                console.log("The value for y will be: ", y, "when i= ", i)
-            }
+        
+        if (props.passedItems.option === '1') {
             
-        } else  {
-            console.log('Oops, nothing happened... The option that was selected was: ', props.passedItems.option)
+            context.beginPath();
+            context.strokeStyle = 'red';
+            
+            
+            let startX = -504;
+            let startY = (valueA * startX) + valueB;
+            
+            
+            context.moveTo(startX, startY);
+            
+            for (let i = -504; i <= 504; i++) {
+                const x = i;
+                const y = (valueA * x) + valueB;  
+                context.lineTo(x, y);  
+
+                
+            }
+    
+            
+            context.stroke();
+        } else {
+            console.log('Oops, nothing happened... The option that was selected was: ', props.passedItems.option);
         }
-        console.log('y will equal: ', y)
-        context.moveTo(-504, 0)
-        context.lineTo(504, y)            
-        context.stroke();
     }
     
 console.log('props.passedItems: ', props.passedItems)
