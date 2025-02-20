@@ -1,4 +1,5 @@
 
+import CanvasGraph from '../../CanvasGraph/CanvasGraph';
 import useStore from '../../zustand/store'
 import './HomePage.css'
 import { useState } from 'react';
@@ -10,15 +11,18 @@ function HomePage() {
   const [ defaulto, setDefaulto ] = useState(false)
   const [ C , setC ] = useState(false)
   const [ isChecked, setIsChecked ] = useState(false)
-  const [ valueA, setValueA ] = useState(1)
-  const [ valueB, setValueB ] = useState(0)
-  const [ valueC, setValueC ] = useState(0)
   const [ valueY, setValueY ] = useState(0)
   const [ valueX, setValueX ] = useState(0)
   const [ roots, setRoots ] = useState([])
   const [ showing, setShowing ] = useState(true)
   const [ functionOption, setFunctionOption ] = useState('')
-
+  const [ passedItems, setPassedItems ] = useState({
+    a: 1,
+    b: 0,
+    c: 0,
+    option: '0'
+  })
+  console.log('PassedItems: ', passedItems)
   function checkedBox(e) {
     console.log("What is isChecked set to: ", isChecked)
     setIsChecked(e.target.checked)
@@ -30,12 +34,12 @@ function HomePage() {
     console.log('What function am I using? ', functionOption)
     if (functionOption === '1'){
       console.log('function base selected is: aX + b')
-      setValueY( Number( (valueA * valueX) + valueB ) )
+      setValueY( Number( (passedItems.a * valueX) + passedItems.b ) )
       
     } else if ( functionOption === '2'){
-      setValueY( (valueA * (valueX**2)) + valueB )
+      setValueY( (passedItems.a * (valueX**2)) + passedItems.b )
     } else if ( functionOption === '3'){
-      setValueY( ( valueA * (valueX**2)) + (valueB * valueX) + valueC)
+      setValueY( ( passedItems.a * (valueX**2)) + (passedItems.b * valueX) + passedItems.c)
     } else {
       alert("Please make a selection so we can calculate the values for you.")
     }
@@ -49,18 +53,19 @@ function HomePage() {
     setRoots([])
     // to solve for X: x = -b + or - Math.sqrt(b^2 - 4ac + 4ay) all divided by 2a
     if ( functionOption === '1') {
-      solutionOne = ((valueY - valueB) / valueA )
+      solutionOne = ((valueY - passedItems.b) / passedItems.a )
       setRoots( [ solutionOne ] )
     } else if ( functionOption === '2' ){
-      solutionOne = Math.sqrt((valueY - valueB) / valueA)
-      solutionTwo = - Math.sqrt( ( valueY - valueB) / valueA )
+      solutionOne = Math.sqrt((valueY - passedItems.b) / passedItems.a)
+      solutionTwo = - Math.sqrt( ( valueY - passedItems.b) / passedItems.a )
       setRoots([solutionOne, solutionTwo])
       setShowing(false)
       
     }
     else if ( functionOption === '3'){
-    solutionOne = (-(valueB) + Math.sqrt( (valueB**2) - (4 * valueA * valueC) + ( 4 * valueA * valueY ) ) / ( 2*valueA)).toFixed(4)
-    solutionTwo = (-(valueB) - Math.sqrt( (valueB**2) - (4 * valueA * valueC) + ( 4 * valueA * valueY ) ) / ( 2*valueA)).toFixed(4)
+      //Create an onchange value for the number in the toFixed method to allow the user to feel like god.
+    solutionOne = (-(passedItems.b) + Math.sqrt( (passedItems.b**2) - (4 * passedItems.a * passedItems.c) + ( 4 * passedItems.a * valueY ) ) / ( 2*passedItems.a)).toFixed(4)
+    solutionTwo = (-(passedItems.b) - Math.sqrt( (passedItems.b**2) - (4 * passedItems.a * passedItems.c) + ( 4 * passedItems.a * valueY ) ) / ( 2*passedItems.a)).toFixed(4)
     setRoots( [solutionOne, solutionTwo] )
     setShowing(false)
     } else {
@@ -74,20 +79,29 @@ function HomePage() {
   return (
     <>
     <div>
-      <img src='https://placekeanu.com/400/400' className='placeholder'></img>
+      <CanvasGraph  passedItems={passedItems}  />
       
     </div>
     {/* May change select feature to: https://codepen.io/celine-andre/pen/JjxVbaO */}
       <select onChange={(e)=>{ 
         if(e.target.value === '0'){
-          setDefaulto(false), setC(false), setFunctionOption('0')
+          setDefaulto(false), setC(false)
         }
-        else if( e.target.value === '1' ||  e.target.value === '2'){
-          setDefaulto(true), setC(false), setFunctionOption(e.target.value)
+        else if( e.target.value === '1' ){
+          setDefaulto(true), setC(false)
+          
+        }
+        else if( e.target.value === '2' ){
+          setDefaulto(true), setC(false)
+         
         }
         else if(e.target.value === '3'){
-            setC(true), setDefaulto(true), setFunctionOption('3');
+            setC(true), setDefaulto(true);
         }
+        setFunctionOption(e.target.value)
+        setPassedItems({...passedItems, option: e.target.value})
+        console.log(functionOption)
+        console.log('passable items: ', passedItems)
         }}>
         <option value={'0'}> Please select one of the following funcitons</option>
         <option value={'1'}> y = Ax + B</option>
@@ -101,14 +115,14 @@ function HomePage() {
           Please give A a value: <input 
           placeholder='Default = 1' 
           type='number' 
-          onChange={(e)=>{setValueA(e.target.value)}}
+          onChange={(e)=>{setPassedItems({...passedItems, a: e.target.value})}}
           />
         </p>
         
         <p>
           Please give B a value: <input 
           placeholder='Default = 0' type='number'
-          onChange={(e)=>{setValueB(Number(e.target.value))}}
+          onChange={(e)=>{setPassedItems({...passedItems, b: e.target.value})}}
           />
           
         </p>
@@ -117,7 +131,7 @@ function HomePage() {
             <input 
             placeholder='Default = 0' 
             type='number'
-            onChange={(e)=>{setValueC(Number(e.target.value))}}
+            onChange={(e)=>{setPassedItems({...passedItems, c: e.target.value})}}
             />
           </p>
         ) : (
