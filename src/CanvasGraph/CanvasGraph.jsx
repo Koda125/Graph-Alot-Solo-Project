@@ -10,6 +10,7 @@ const CanvasGraph = ( props ) => {
     const [coordinates, setCoordinates ] = useState([{
          
     }])
+    const [ slope, setSlope ] = useState()
 
     function DrawGraph() {
         console.log('Render graph lines.')
@@ -19,12 +20,12 @@ const CanvasGraph = ( props ) => {
         // Apply translation to center the coordinates
         // context.translate(canvas.width / 2, canvas.height / 2);
         // begin to draw lines of a cartisian graph.
-        // context.beginPath();
-        // context.strokeStyle = "black"
-        // context.moveTo( 0, 504);
-        // context.lineTo(0, -504);
-        // context.moveTo(-504, 0);
-        // context.lineTo(504, 0);
+        context.beginPath();
+        context.strokeStyle = "black"
+        context.moveTo( 252, 0);
+        context.lineTo(252, 504);
+        context.moveTo(0, 252);
+        context.lineTo(504, 252);
 
         
         
@@ -93,9 +94,11 @@ const CanvasGraph = ( props ) => {
           context.lineTo(endX, endY);
           context.stroke();
           console.log("Drawing line to: ", endX, endY);
+          setSlope(-1 * ( (endY - startY) / (endX - startX)).toFixed(4))
         } else {
           alert("Please click two spots on the graph.");
         }
+        
       }
 
 //Create new drawLine function to get passed data from captureMouseClick.
@@ -157,7 +160,8 @@ console.log('props.passedItems: ', props.passedItems)
             <button onClick={()=>{DrawLine()}}>Graph</button>
             
             <button onClick={()=>{addToFavorites()}}>Add to Favorites</button>
-            </p>
+        </p>
+        <p>The slop of your line is: {slope}</p>
         
     </>
     
