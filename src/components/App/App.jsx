@@ -11,6 +11,7 @@ import HomePage from '../HomePage/HomePage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Header from '../Header/Header'
+import Favorites from '../Favorites/Favorites';
 
 
 function App() {
@@ -98,6 +99,12 @@ function App() {
             element={
               <h2>404 Page</h2>
             } 
+          />
+          <Route 
+          exact path='/Favorites'
+          element={
+            <Favorites />
+          }
           />
         </Routes>
       </main>
