@@ -7,6 +7,10 @@ const CanvasGraph = ( props ) => {
     const [valueX, setValueX ] = useState([])
     const [valueY, setValueY ] = useState([])
 
+    const [coordinates, setCoordinates ] = useState([{
+         
+    }])
+
     function DrawGraph() {
         console.log('Render graph lines.')
         const canvas = ref.current;
@@ -60,7 +64,11 @@ const CanvasGraph = ( props ) => {
         console.log('The clicked coordinates are: ', x, y)
         setValueX([...valueX, x])
         setValueY([...valueY, y])
-        console.log('The array length is of valueX is: ', valueX.length)
+        setCoordinates([...coordinates, {
+            x: x,
+            y: y
+        }])
+        console.log("What's chilling in coordinates: ", coordinates)
         console.log("The clicked coordinates are: ", valueX, valueY);
         
       }
@@ -72,12 +80,12 @@ const CanvasGraph = ( props ) => {
         const canvas = ref.current;
         const context = canvas.getContext('2d');
     
-        if (valueX.length > 1) {
+        if (coordinates.length > 1) {
           // Draw the line between the first two points
-          const startX = valueX[0];
-          const startY = valueY[0];
-          const endX = valueX[1];
-          const endY = valueY[1];
+          const startX = coordinates[1].x;
+          const startY = coordinates[1].y;
+          const endX = coordinates[2].x;;
+          const endY = coordinates[2].y;;
           
           context.beginPath();
           context.strokeStyle = 'red';
