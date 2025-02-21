@@ -21,6 +21,9 @@ const CanvasGraph = ( props ) => {
         context.lineTo(0, -504);
         context.moveTo(-504, 0);
         context.lineTo(504, 0);
+
+        
+
         context.stroke();
     }
 
@@ -34,12 +37,7 @@ const CanvasGraph = ( props ) => {
           const y = (canvas.width / 2) - (event.clientY - rect.top);
           console.log(`x: ${x}, y: ${y}`);
     
-          // Optional: Draw a small circle at the mouse position
           
-          context.beginPath();
-          context.arc(x, y, 5, 10, 2 * Math.PI);
-          context.fillStyle = 'red';
-          context.fill();
         };
     
         canvas.addEventListener('mousemove', handleMouseMove);
@@ -53,24 +51,26 @@ const CanvasGraph = ( props ) => {
         
         const canvas = ref.current;
         const context = canvas.getContext('2d');
-        
+       
         if (props.passedItems.option === '1') {
             
             context.beginPath();
             context.strokeStyle = 'red';
             
             
-            let startX = -504;
-            let startY = Number((valueA * startX) + valueB);
+            let startX = -252;
+            let startY = (Number((valueA * startX) + valueB));
             console.log("Where does Y start: ", startY)
             
             
             context.moveTo(startX, startY);
             
-            for (let i = -504; i <= 504; i++) {
-                const x = i;
-                const y = (valueA * x) + valueB;  
+            for (let x = -504; x <= 504; x++) {
+                
+                const y = Number(valueA * x + valueB);  
                 context.lineTo(x, y);  
+                // console.log('value of y at each iteration of x: ', y)
+                // console.log("What values are we using: ", valueA, valueB, x)
 
                 
             }
