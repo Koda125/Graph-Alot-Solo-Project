@@ -102,6 +102,7 @@ const CanvasGraph = ( props ) => {
       }
 
 //Create new drawLine function to get passed data from captureMouseClick.
+// Unable to make values for A > 1 B would have to be equal to (a-1)*250. Once completed, will consult and try to make this function work instead
 
     // function DrawLine(valueA, valueB, valueC) {
     //     console.log(valueA, valueB, valueC);
@@ -161,7 +162,7 @@ console.log('props.passedItems: ', props.passedItems)
             
             <button onClick={()=>{addToFavorites()}}>Add to Favorites</button>
         </p>
-        <p>The slop of your line is: {slope}</p>
+        <p>The slope of your line is: {slope}</p>
         
     </>
     
