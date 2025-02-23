@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import FavoriteCanvas from "../FavoriteCanvas/FavoriteCanvas";
 
 function Favorites( ){
 
@@ -8,11 +9,13 @@ function Favorites( ){
         fetchFavorites()
         console.log("FavoriteList: ", favoritesList)
       }, []);
-
+      
     function fetchFavorites() {
         console.log('Fetching favorites')
-        axios.get("/api/favorites")
-        .then((response) => {
+        axios({
+            method: "GET",
+            url: "/api/favorites"
+        }).then((response) => {
             console.log("Response: ", response.data)
             setFavoritesList(response.data)
         }).catch((error) => {
@@ -24,7 +27,15 @@ function Favorites( ){
     
 
     return (
-        <h1>Favorites</h1>
+        <>
+            <h1>Favorites</h1>
+            <p>{JSON.stringify(favoritesList)}</p>
+            {favoritesList.map((item) => (
+                <div key={item.id}>
+                    <FavoriteCanvas item={item}/>
+                </div>
+            ))}
+        </>
     )
 }
 export default Favorites;
