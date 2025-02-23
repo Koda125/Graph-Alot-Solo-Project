@@ -91,19 +91,10 @@ const CanvasGraph = ( props ) => {
         const canvas = ref.current;
         const context = canvas.getContext('2d');
     
-        if (coordinates.length > 1) {
-          // Draw the line between the first two points
-          const startX = coordinates[1].x;
+        const startX = coordinates[1].x;
           const startY = coordinates[1].y;
           const endX = coordinates[2].x;;
           const endY = coordinates[2].y;;
-          
-          context.beginPath();
-          context.strokeStyle = 'red';
-          context.moveTo(startX, startY);
-          context.lineTo(endX, endY);
-          context.stroke();
-          console.log("Drawing line to: ", endX, endY);
           setNewFavorite({
             start_values_x: startX,
             start_values_y: startY,
@@ -111,11 +102,27 @@ const CanvasGraph = ( props ) => {
             end_values_x: endX,
             end_values_y: endY
           })
+
+          context.beginPath();
+          context.strokeStyle = 'red';
+        context.moveTo(startX, startY);
+          context.lineTo(endX, endY);
+          
+          console.log("Drawing line to: ", endX, endY);
+
+        if (coordinates.length > 2) {
+          // Draw the line between the first two points
+          
+          context.lineTo(coordinates[3].x, coordinates[3].y)
+          
+          
+          
+          
           setSlope(-1 * ( (endY - startY) / (endX - startX)).toFixed(4))
         } else {
           alert("Please click two spots on the graph.");
         }
-        
+        context.stroke();
       }
 
 //Create new drawLine function to get passed data from captureMouseClick.
@@ -191,7 +198,7 @@ console.log('props.passedItems: ', props.passedItems)
             
             <button onClick={()=>{addToFavorites()}}>Add to Favorites</button>
         </p>
-        <p>The slope of your line is: {slope}</p>
+        <p>The slope of your First line is: {slope}</p>
         
     </>
     

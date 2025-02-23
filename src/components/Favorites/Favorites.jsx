@@ -29,7 +29,7 @@ function Favorites( ){
     return (
         <>
             <h1>Favorites</h1>
-            <p>{JSON.stringify(favoritesList)}</p>
+            
             {favoritesList.map((item) => (
                 <div key={item.id}>
                     <FavoriteCanvas item={item}/>
