@@ -14,10 +14,10 @@ const router = express.Router();
 router.get('/' , rejectUnauthenticated, (req, res) => {
     console.log('GET /api/favorites')
     const userID = req.user.id;
-    const queryText = `SELECT u.username as "userName", favorite_graph.start_values_x as "start_x", favorite_graph.start_values_y as "start_y", favorite_graph.end_values_x as "end_x", favorite_graph.end_values_y as "end_y", favorite_graph.date_created as "date_created", favorite_graph.user_id as "UserID"
+    const queryText = `SELECT u.username as "userName", favorite_graph.start_values_x as "start_x", favorite_graph.start_values_y as "start_y", favorite_graph.end_values_x as "end_x", favorite_graph.end_values_y as "end_y", favorite_graph.user_id as "UserID", favorite_graph.id as "graphID" ,favorite_graph.date_created as "date_created"
                         FROM "user" as u
                         JOIN "favorite_graph" on u.id = favorite_graph.user_id
-                        WHERE u.id = $1 
+                        WHERE u.id = $1
                         ORDER BY favorite_graph.id ASC;`;
     pool.query(queryText, [userID])
     
@@ -26,7 +26,7 @@ router.get('/' , rejectUnauthenticated, (req, res) => {
         res.send(results.rows);
     }).catch((error) => {
         console.log("Oops, an error occured in your GET '/'", error)
-        send.status(400)
+        res.status(400)
     })
 })
 
@@ -50,6 +50,7 @@ pool.query(queryText, [start_values_x, start_values_y, user_id, end_values_x, en
 
 router.delete('/:id', rejectUnauthenticated, (req, res) =>{
     const favoriteID = req.params.id;
+    console.log("req.user: ", req.user)
     const userID = req.user.id
     const queryText= `DELETE FROM favorite_graph WHERE favorite_graph.id=$1 
                         AND favorite_graph.user_id =$2;`;
