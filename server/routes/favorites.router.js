@@ -17,8 +17,8 @@ router.get('/' , rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT u.username as "userName", favorite_graph.values_x as "X", favorite_graph.values_y as "y"
                         FROM "user" as u
                         JOIN "favorite_graph" on u.id = favorite_graph.user_id
-                        WHERE u.id = 3 
-                        ORDER BY favorite_graph.id ASC;`
+                        WHERE u.id = $1 
+                        ORDER BY favorite_graph.id ASC;`;
     pool.query(queryText, [userID])
     
     .then((results) => {

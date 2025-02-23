@@ -25,7 +25,7 @@ app.use(passport.session());
 
 // Apply router files:
 app.use('/api/user', userRouter);
-// app.use('/api/favorites', favoriteRouter);
+app.use('/api/favorites', favoriteRouter);
 
 // Start the server:
 app.listen(PORT, () => {
