@@ -1,12 +1,22 @@
 import { useRef, useEffect, useState } from "react";
+import axios from "axios";
+import useStore from "../zustand/store";
 
 const CanvasGraph = ( props ) => {
     const ref=useRef();
     console.log("Props: ", props)
 
+    const user = useStore((state) => state.user);
     const [valueX, setValueX ] = useState([])
     const [valueY, setValueY ] = useState([])
+    const  [newFavorite, setNewFavorite ] = useState({
+        start_values_x: 0,
+        start_values_y: 0,
+        user_id: user.id,
+        end_values_x: 0,
+        end_values_y: 0
 
+    })
     const [coordinates, setCoordinates ] = useState([{
          
     }])
@@ -94,6 +104,13 @@ const CanvasGraph = ( props ) => {
           context.lineTo(endX, endY);
           context.stroke();
           console.log("Drawing line to: ", endX, endY);
+          setNewFavorite({
+            start_values_x: startX,
+            start_values_y: startY,
+            user_id: user.id,
+            end_values_x: endX,
+            end_values_y: endY
+          })
           setSlope(-1 * ( (endY - startY) / (endX - startX)).toFixed(4))
         } else {
           alert("Please click two spots on the graph.");
@@ -141,6 +158,18 @@ const CanvasGraph = ( props ) => {
     // }
     function addToFavorites( ){
         console.log('Adding to favorites 🔥')
+        axios({
+            method: 'POST',
+            url: "/api/favorites",
+            data: newFavorite
+
+        })
+        .then((response) => {
+            console.log("POSTing: ", newFavorite)
+
+        }).catch((error) => {
+            console.log("There was an error in your favorite POST call: ", error)
+        })
     }
 
 

@@ -30,4 +30,24 @@ router.get('/' , rejectUnauthenticated, (req, res) => {
     })
 })
 
+router.post('/', rejectUnauthenticated,(req, res) => {
+    const {
+        start_values_x,
+        start_values_y,
+        user_id,
+        end_values_x,
+        end_values_y
+    } = req.body
+    const queryText = `INSERT INTO favorite_graph ( start_values_x, start_values_y, user_id, end_values_x, end_values_y)
+VALUES ( $1, $2, $3 ,$4, $5 );`;
+pool.query(queryText, [start_values_x, start_values_y, user_id, end_values_x, end_values_y]).then((results) => {
+    console.log("POST in favorites router successful")
+    res.sendStatus(201)
+}).catch((error) =>{
+    console.log("Error in favorites POST router", error)
+})
+} )
+
+
+
 module.exports = router;
