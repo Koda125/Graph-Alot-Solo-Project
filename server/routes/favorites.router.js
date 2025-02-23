@@ -14,7 +14,7 @@ const router = express.Router();
 router.get('/' , rejectUnauthenticated, (req, res) => {
     console.log('GET /api/favorites')
     const userID = req.user.id;
-    const queryText = `SELECT u.username as "userName", favorite_graph.values_x as "x", favorite_graph.values_y as "y", favorite_graph.date_created as "date_created"
+    const queryText = `SELECT u.username as "userName", favorite_graph.start_values_x as "start_x", favorite_graph.start_values_y as "start_y", favorite_graph.end_values_x as "end_x", favorite_graph.end_values_y as "end_y", favorite_graph.date_created as "date_created"
                         FROM "user" as u
                         JOIN "favorite_graph" on u.id = favorite_graph.user_id
                         WHERE u.id = $1 

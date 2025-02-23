@@ -33,8 +33,8 @@ const FavoriteCanvas = ( props ) => {
         const context = canvas.getContext('2d');
         context.strokeStyle = "purple"
         context.beginPath();
-        context.moveTo(252, 252);
-        context.lineTo(props.item.X, props.item.y)
+        context.moveTo(props.item.start_x, props.item.start_y);
+        context.lineTo(props.item.end_x, props.item.end_y)
         context.stroke()
 
     }
@@ -50,6 +50,7 @@ const FavoriteCanvas = ( props ) => {
         height={504}
         onClick={(e)=>captureMouseClick(e)}
         />
+        
         </>
     )
 }
