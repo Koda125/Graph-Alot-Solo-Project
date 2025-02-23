@@ -41,7 +41,7 @@ const FavoriteCanvas = ( props ) => {
 
     return (
         <>
-        <h2>Person's favorite graphs will go here</h2>
+        <h2>Date Favorited: {props.item.date_created}</h2>
         <canvas
         style={{ border: "5px solid blue" } }
         ref={ref}
