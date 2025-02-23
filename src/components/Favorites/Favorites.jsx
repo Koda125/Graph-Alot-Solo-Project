@@ -23,8 +23,17 @@ function Favorites( ){
             
         })
     }
-
-    
+    function deleteFavorite( favoriteID ) {
+        console.log('Deleting favorite item.')
+        axios
+            .delete(`/api/favorites/${favoriteID}`)
+            .then((response) => {
+                console.log("The DELETE request was successful", response.data);
+                fetchFavorites();
+            }).catch((error) => {
+                console.log("There was an error in your DELETE request", error)
+            })
+        }
 
     return (
         <>
@@ -33,6 +42,7 @@ function Favorites( ){
             {favoritesList.map((item) => (
                 <div key={item.id}>
                     <FavoriteCanvas item={item}/>
+                    <button onClick={()=> {deleteFavorite(item.id)}}>Delete me</button>
                 </div>
             ))}
         </>

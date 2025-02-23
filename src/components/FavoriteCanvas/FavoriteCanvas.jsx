@@ -1,8 +1,11 @@
 import { useEffect, useRef } from "react";
+import axios from "axios";
+import useStore from "../../zustand/store";
 
 const FavoriteCanvas = ( props ) => {
     const ref=useRef();
     console.log("Passed Props: ", props)
+    const user = useStore((state) => state.user);
 
     function DrawGraph() {
         console.log('Render graph lines.')
@@ -39,6 +42,10 @@ const FavoriteCanvas = ( props ) => {
 
     }
 
+    
+        
+    
+
     return (
         <>
         <h2>Date Favorited: {props.item.date_created}</h2>
@@ -50,7 +57,9 @@ const FavoriteCanvas = ( props ) => {
         height={504}
         onClick={(e)=>captureMouseClick(e)}
         />
+        <p>
         
+        </p>
         </>
     )
 }

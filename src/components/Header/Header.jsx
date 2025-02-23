@@ -9,7 +9,7 @@ const user = useStore((state) => state.user);
 
     return (
         <>
-            <h1>Question Everything, Everyone...</h1>
+            <h1>Graph A Lot</h1>
             <div>
         {
           // User is logged in, render these links:}

@@ -112,11 +112,11 @@ const CanvasGraph = ( props ) => {
         setSlope(-1 * ( (endY - startY) / (endX - startX)).toFixed(4))
         if (coordinates.length > 3) {
           // Draw the line between the first two points
+          for( let i = 3; i < coordinates.length; i++  ){
+          context.lineTo(coordinates[i].x, coordinates[i].y)
           
-          context.lineTo(coordinates[3].x, coordinates[3].y)
           
-          
-          
+          }
           
           
         } 
