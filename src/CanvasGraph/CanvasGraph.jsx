@@ -109,8 +109,8 @@ const CanvasGraph = ( props ) => {
           context.lineTo(endX, endY);
           
           console.log("Drawing line to: ", endX, endY);
-
-        if (coordinates.length > 2) {
+        setSlope(-1 * ( (endY - startY) / (endX - startX)).toFixed(4))
+        if (coordinates.length > 3) {
           // Draw the line between the first two points
           
           context.lineTo(coordinates[3].x, coordinates[3].y)
@@ -118,10 +118,8 @@ const CanvasGraph = ( props ) => {
           
           
           
-          setSlope(-1 * ( (endY - startY) / (endX - startX)).toFixed(4))
-        } else {
-          alert("Please click two spots on the graph.");
-        }
+          
+        } 
         context.stroke();
       }
 
