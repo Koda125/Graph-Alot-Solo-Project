@@ -77,7 +77,8 @@ function HomePage() {
   
 
   return (
-    <>
+    <div className='HomePage'>
+    <p>To begin, please start by clicking on two points of the graph.</p>
     <div>
       <CanvasGraph  passedItems={passedItems}  />
       
@@ -144,7 +145,7 @@ function HomePage() {
       </div>
       <div>
         
-        <input 
+        <input  
         type='checkbox'
         checked={isChecked}
         onChange={checkedBox}
@@ -154,7 +155,7 @@ function HomePage() {
       </div>
     { isChecked ? (
       <>
-       <div>
+       <div className='HomePage'>
           <p>Find an exact value for Y? </p>
           <p>
             If X =
@@ -193,7 +194,7 @@ function HomePage() {
         
       
       
-  </>
+  </div>
   );
 }
 

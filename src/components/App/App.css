@@ -1,0 +1,13 @@
+/* use darker colors to simulate dark mode */
+
+:root {
+    --mainColor: magenta
+}
+
+.mainHeader {
+    border-style: double;
+    border-width: thick;
+    border-color: blue;
+    background-color: var(--mainColor);
+}
+

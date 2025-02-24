@@ -12,6 +12,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Header from '../Header/Header'
 import Favorites from '../Favorites/Favorites';
+import "./App.css"
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
 
   return (
     <>
-      <header>
+      <header className='mainHeader'>
         <h1>Prime Solo Project</h1>
         <Header />
         <Nav />

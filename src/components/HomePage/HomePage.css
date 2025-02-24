@@ -1,8 +1,6 @@
-.placeholder {
-    /* padding: inherit; */
-  margin:auto;
-  width: 80000px;
-  height: 350px;
-  display: block;
+.HomePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 

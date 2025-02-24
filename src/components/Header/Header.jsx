@@ -1,5 +1,5 @@
 import useStore from "../../zustand/store";
-
+import "./Header.css"
 import { useState } from "react";
 import Nav from "../Nav/Nav";
 
@@ -9,7 +9,7 @@ const user = useStore((state) => state.user);
 
     return (
         <>
-            <h1>Graph A Lot</h1>
+            <h1 className="header">Graph A Lot</h1>
             <div>
         {
           // User is logged in, render these links:}

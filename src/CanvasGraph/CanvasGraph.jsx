@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import axios from "axios";
 import useStore from "../zustand/store";
+import "./CanvasGraph.css"
 
 const CanvasGraph = ( props ) => {
     const ref=useRef();
@@ -176,29 +177,34 @@ const CanvasGraph = ( props ) => {
             console.log("There was an error in your favorite POST call: ", error)
         })
     }
-
+    function clearGraph() {
+        console.log("Lets get this cleaned up")
+    }
 
 console.log('props.passedItems: ', props.passedItems)
 
     return (
-    <>
-
-        <canvas
-        style={{ border: "5px solid blue" } }
-        ref={ref}
-        {...(props)}
-        width={504}
-        height={504}
-        onClick={(e)=>captureMouseClick(e)}
-        />
-        <p>
-            <button onClick={()=>{DrawLine()}}>Graph</button>
+    <div className="mainGraph">
+        <div >
+            <canvas
             
-            <button onClick={()=>{addToFavorites()}}>Add to Favorites</button>
+            style={{ border: "5px solid blue" } }
+            ref={ref}
+            {...(props)}
+            width={504}
+            height={504}
+            onClick={(e)=>captureMouseClick(e)}
+            />
+        </div>
+        <p className="buttonGroup">
+            <button className="graphButton" onClick={()=>{DrawLine()}}>Graph</button>
+            
+            <button className="graphButton" onClick={()=>{addToFavorites()}}>Add to Favorites</button>
+            <button className="graphButton" onClick={()=> {clearGraph()}}>Clear Graph</button>
         </p>
         <p>The slope of your First line is: {slope}</p>
         
-    </>
+    </div>
     
 )}
 

@@ -1,3 +1,17 @@
-.Fav_button {
-    padding: 5px
+.mainGraph {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    
+}
+
+.graphButton {
+    margin: 5px;
+    
+}
+
+.buttonGroup {
+    display:flex;
+    justify-content: center;
 }
