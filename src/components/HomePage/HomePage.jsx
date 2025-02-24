@@ -23,9 +23,9 @@ function HomePage() {
     option: '0'
   })
   console.log('PassedItems: ', passedItems)
-  function checkedBox(e) {
+  function checkedBox() {
     console.log("What is isChecked set to: ", isChecked)
-    setIsChecked(e.target.checked)
+    setIsChecked(!isChecked)
   }
 
   function findY(){
@@ -143,16 +143,11 @@ function HomePage() {
         <p>Please make a selection to proceed.</p>
       )}
       </div>
-      <div>
         
-        <input  
-        type='checkbox'
-        checked={isChecked}
-        onChange={checkedBox}
-        />
-       
-        
-      </div>
+          <div className= {isChecked ? 'active-button' : 'inactive-button'}  onClick={checkedBox}>
+          Click for more options
+          </div>
+          
     { isChecked ? (
       <>
        <div className='HomePage'>
@@ -160,6 +155,7 @@ function HomePage() {
           <p>
             If X =
           </p>
+          
             <input 
             type='number'
             placeholder='Value for X'
@@ -189,7 +185,7 @@ function HomePage() {
       </div> 
       </>
        ) : (
-        <p>Please check box for more options.</p>
+        <p></p>
        )}
         
       
