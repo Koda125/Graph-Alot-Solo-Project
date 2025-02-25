@@ -97,11 +97,11 @@ const CanvasGraph = ( props ) => {
           const endX = coordinates[2].x;;
           const endY = coordinates[2].y;;
           setNewFavorite({
-            start_values_x: startX,
-            start_values_y: startY,
+            start_values_x: Number(startX),
+            start_values_y: Number(startY),
             user_id: user.id,
-            end_values_x: endX,
-            end_values_y: endY
+            end_values_x: Number(endX),
+            end_values_y: Number(endY)
           })
 
           context.beginPath();
