@@ -14,9 +14,9 @@ const user = useStore((state) => state.user);
         {
           // User is logged in, render these links:}
           user.id && (
-            <>
+            <div className="log-out-button">
               <button onClick={logOut}>Log Out</button>
-            </>
+            </div>
           )
         }
       </div>

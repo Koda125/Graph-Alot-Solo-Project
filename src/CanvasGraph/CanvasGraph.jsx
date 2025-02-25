@@ -18,7 +18,7 @@ const CanvasGraph = ( props ) => {
         end_values_y: 0
 
     })
-    const [coordinates, setCoordinates ] = useState([{
+    let [coordinates, setCoordinates ] = useState([{
          
     }])
     const [ slope, setSlope ] = useState()
@@ -163,10 +163,10 @@ const CanvasGraph = ( props ) => {
     //     }
     // }
     function addToFavorites( ){
-        console.log('Adding to favorites 🔥')
+        console.log('Adding to favorites 🔥', newFavorite)
         axios({
             method: 'POST',
-            url: "/api/favorites",
+            url: "/api/favorites/",
             data: newFavorite
 
         })
@@ -177,8 +177,14 @@ const CanvasGraph = ( props ) => {
             console.log("There was an error in your favorite POST call: ", error)
         })
     }
-    function clearGraph() {
+     function clearGraph() {
         console.log("Lets get this cleaned up")
+        const canvas = ref.current;
+        const context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        DrawGraph();
+        
+        
     }
 
 console.log('props.passedItems: ', props.passedItems)

@@ -31,7 +31,9 @@ function Nav() {
             </li>
           </>
         )
+        
       }
+      
       {/* Show these links regardless of auth status: */}
         <li>
           <NavLink to="/about">About</NavLink>

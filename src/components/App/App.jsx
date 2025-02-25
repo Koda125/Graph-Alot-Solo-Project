@@ -30,7 +30,7 @@ function App() {
         <Header />
         <Nav />
       </header>
-      <main>
+      <main className='app-main'> 
         <Routes>
           <Route 
             exact path="/"
