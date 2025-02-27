@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import axios from "axios";
 import useStore from "../../zustand/store";
+import "./FavoriteCanvas.css"
 
 const FavoriteCanvas = ( props ) => {
     const ref=useRef();
@@ -35,6 +36,7 @@ const FavoriteCanvas = ( props ) => {
         const canvas = ref.current;
         const context = canvas.getContext('2d');
         context.strokeStyle = "purple"
+        context.lineWidth = 2
         context.beginPath();
         context.moveTo(props.item.start_x, props.item.start_y);
         context.lineTo(props.item.end_x, props.item.end_y)
@@ -48,9 +50,11 @@ const FavoriteCanvas = ( props ) => {
 
     return (
         <>
-        <h2>Date Favorited: {props.item.date_created}</h2>
+        
         <canvas
+        className="favorite-graph"
         style={{ border: "5px solid blue" } }
+        
         ref={ref}
         {...(props)}
         width={504}

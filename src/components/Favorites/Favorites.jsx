@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import FavoriteCanvas from "../FavoriteCanvas/FavoriteCanvas";
+import "./Favorites.css"
 
 function Favorites( ){
 
@@ -26,6 +27,7 @@ function Favorites( ){
     function deleteFavorite( favoriteID ) {
         console.log('Deleting favorite item.')
         console.log("FavoriteID: ", favoriteID)
+        alert('Graph is being deleted. Lost forever now... ')
         axios
             .delete(`/api/favorites/${favoriteID}`)
             
@@ -38,17 +40,23 @@ function Favorites( ){
         }
 
     return (
-        <>
-            <h1>Favorites</h1>
+        <div>
+            <h1 className="favorite-header">Favorites</h1>
             
             {favoritesList.map((item, index) => (
-                <div key={index}>
-                    <FavoriteCanvas item={item}/>
-                    
+                <div className="favorite-graph" key={index}>
+                    <h2 className="favorite-header">Date Favorited: {item.date_created}</h2>
+                    <div className="graph">
+                        <FavoriteCanvas item={item}/>
+                    </div>
+                    <p>The slop of this line is: 
+                        { (-1 * ((item.end_y - item.start_y) / (item.end_x - item.start_x))).toFixed(2)}
+                    </p>
                     <button onClick={()=> {deleteFavorite(item.graphID)}}>Delete me</button>
                 </div>
             ))}
-        </>
+        </div>
     )
 }
+//slope = (y2 - y1) / (x2 - x1)
 export default Favorites;

@@ -109,7 +109,7 @@ function App() {
           />
         </Routes>
       </main>
-      <footer>
+      <footer className='app-footer'>
         <p>Copyright © {new Date().getFullYear()}</p>
       </footer>
     </>

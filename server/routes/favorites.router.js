@@ -18,7 +18,7 @@ router.get('/' , rejectUnauthenticated, (req, res) => {
                         FROM "user" as u
                         JOIN "favorite_graph" on u.id = favorite_graph.user_id
                         WHERE u.id = $1
-                        ORDER BY favorite_graph.id ASC;`;
+                        ORDER BY favorite_graph.id DESC;`;
     pool.query(queryText, [userID])
     
     .then((results) => {

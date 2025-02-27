@@ -103,7 +103,7 @@ const CanvasGraph = ( props ) => {
             end_values_x: Number(endX),
             end_values_y: Number(endY)
           })
-
+          context.lineWidth = 2;
           context.beginPath();
           context.strokeStyle = 'red';
         context.moveTo(startX, startY);
