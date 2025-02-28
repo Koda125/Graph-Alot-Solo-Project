@@ -59,20 +59,15 @@ FOR EACH ROW
 EXECUTE PROCEDURE set_updated_at_to_now();
 
 --Functions Table:
-CREATE TABLE "functions" (
+--Please note: type "float" may be "double precision" depending on the database software being used. 
+CREATE TABLE "favorite_graph" (
   "id" SERIAL PRIMARY KEY,
   "user_id" INT UNIQUE NOT NULL,
-  "functon_base" INT default NULL,
-  "value_a" INT NOT NULL DEFAULT 0,
-  "value_b" INT NOT NULL DEFAULT 0,
-  "value_c" INT NOT NULL DEFAULT 0,
-  "value_d" INT NOT NULL DEFAULT 0,
+  "start_values_x" float NOT NULL
+  "start_values_y" float NOT NULL DEFAULT 0,
+  "end_values_x" float NOT NULL DEFAULT 0,
+  "end_values_y" float NOT NULL DEFAULT 0,
   "time_created" TIMESTAMPTZ default now()
 );
 
--- Favorites Table:
-CREATE TABLE "favorite_graph" (
-	id SERIAL PRIMARY KEY,
-	date_created TIMESTAMPTZ default now(),
-	function_id INT
-);
+

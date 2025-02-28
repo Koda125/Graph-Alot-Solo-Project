@@ -53,7 +53,7 @@ const FavoriteCanvas = ( props ) => {
         
         <canvas
         className="favorite-graph"
-        style={{ border: "5px solid blue" } }
+        style={{ border: "5px solid #1da99e" } }
         
         ref={ref}
         {...(props)}

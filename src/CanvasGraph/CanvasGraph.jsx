@@ -110,7 +110,7 @@ const CanvasGraph = ( props ) => {
           context.lineTo(endX, endY);
           
           console.log("Drawing line to: ", endX, endY);
-        setSlope(-1 * ( (endY - startY) / (endX - startX)).toFixed(4))
+        setSlope(-1 * ( (endY - startY) / (endX - startX)).toFixed(2))
         if (coordinates.length > 3) {
           // Draw the line between the first two points
           for( let i = 3; i < coordinates.length; i++  ){
@@ -194,7 +194,7 @@ console.log('props.passedItems: ', props.passedItems)
         <div >
             <canvas
             
-            style={{ border: "5px solid blue" } }
+            style={{ border: "5px solid #1da99e" } }
             ref={ref}
             {...(props)}
             width={504}

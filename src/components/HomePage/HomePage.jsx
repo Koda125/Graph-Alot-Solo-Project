@@ -53,11 +53,11 @@ function HomePage() {
     setRoots([])
     // to solve for X: x = -b + or - Math.sqrt(b^2 - 4ac + 4ay) all divided by 2a
     if ( functionOption === '1') {
-      solutionOne = ((valueY - passedItems.b) / passedItems.a )
+      solutionOne = (((valueY - passedItems.b) / passedItems.a )).toFixed(2)
       setRoots( [ solutionOne ] )
     } else if ( functionOption === '2' ){
-      solutionOne = Math.sqrt((valueY - passedItems.b) / passedItems.a)
-      solutionTwo = - Math.sqrt( ( valueY - passedItems.b) / passedItems.a )
+      solutionOne = (Math.sqrt((valueY - passedItems.b) / passedItems.a).toFixed(2))
+      solutionTwo = - (Math.sqrt( ( valueY - passedItems.b) / passedItems.a )).toFixed(2)
       setRoots([solutionOne, solutionTwo])
       setShowing(false)
       
